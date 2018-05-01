@@ -18,27 +18,31 @@ public class Tester {
 		String keyStoreType = "JCEKS";
 		char[] password = "123456789".toCharArray();
 		String alias = "demo";
-		
-		
+
 		DigitalSignature ds = new DigitalSignatureImpl();
 		
 //		KeyPair keyPair = ds.getKeyPair(keyStorePath, keyStoreType, password, alias);
 		
 		//get private key
+		System.out.println("Fecthing private key");
 		PrivateKey privateKey = ds.getPrivateKey(keyStorePath, keyStoreType, password, alias);
 		
 		String plainText = "Hello World";
 		String algorithm = "SHA1withDSA";
 		
 		//generate the digital signature
+		System.out.println("Generating digital signature");
 		String encodedCipherText = ds.generateDigitalSignature(plainText, algorithm, privateKey);
 		
 		String publicKeyPath = "D:/Work/KeyStore/demoPublicKey.cer";
 		//retrieve public key
-		PublicKey publicKey = ds.getPublicKey(publicKeyPath, algorithm);
+		System.out.println("Fecthing public key");
+		PublicKey publicKey = ds.getPublicKey(publicKeyPath);
 		
 		//verify the digital signature
-		ds.verifyDigitalSignature(plainText, encodedCipherText, algorithm, publicKey);
+		System.out.println("Verifying digital signature");
+		Boolean isValid = ds.verifyDigitalSignature(plainText, encodedCipherText, algorithm, publicKey);
 		
+		System.out.println("Valid Digital Signature? "+isValid);
 	}
 }

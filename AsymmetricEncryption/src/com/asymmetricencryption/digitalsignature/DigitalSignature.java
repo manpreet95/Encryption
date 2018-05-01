@@ -10,7 +10,7 @@ public interface DigitalSignature {
 	
 	PrivateKey getPrivateKey(String keyStorePath, String keyStoreType, char[] password, String alias) throws Exception;
 	
-	PublicKey getPublicKey(String publicKeyPath, String algorithm) throws Exception;
+	PublicKey getPublicKey(String publicKeyPath) throws Exception;
 	
 	String generateDigitalSignature(String plainText, String algorithm, PrivateKey privateKey) throws Exception;
 	
